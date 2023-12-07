@@ -1,4 +1,4 @@
-# app_atividade
+# flutter_application_despesas
 
 A new Flutter project.
 
