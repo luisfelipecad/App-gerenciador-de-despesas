@@ -12,54 +12,82 @@ class _modelsState extends State<models> {
   
   final _tituloController = new TextEditingController();
   final _conteudoController = new TextEditingController();
+  final _formularioKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 30),
-      height: 1920,
-      color: green2,
-      child:  Form( 
-        child:SingleChildScrollView(
-        child: Column(
-          children: [
-            TextFormField(controller: _tituloController, decoration: const InputDecoration(labelText: 'Titulo'),),
-            TextFormField(controller: _conteudoController, decoration: const InputDecoration(labelText: 'Conteudo'), maxLines: 10,),
-            const SizedBox(height: 20),
+    return Scaffold(
+      appBar: AppBar(),
+      body: Container(
+        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 30),
+        height: 1920,
+        color: green2,
+        child:  Form( 
+          key: _formularioKey,
+          child:SingleChildScrollView(
+          child: Column(
+            children: [
 
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                ElevatedButton(
-                  onPressed: (){
-                    Navigator.pop(context);
-                    ScaffoldMessenger.of(context).showSnackBar((
-                      const SnackBar(
-                        content: Text('Nota salva com sucesso'),
-                      )),
-                    );
-                  },
-                  child: Text('Salvar')
+              TextFormField(
+                controller: _tituloController,
+                decoration: const InputDecoration(labelText: 'Titulo'),
+
+                validator: (String? _titulo){
+                  if(_titulo!.isEmpty){
+                    return 'Campo obrigatorio';
+                  }
+                },
                 ),
 
-                const SizedBox(width: 10),
-                ElevatedButton(
-                  onPressed: (){
-                    Navigator.pop(context);
-                    ScaffoldMessenger.of(context).showSnackBar((
+              TextFormField(
+                controller: _conteudoController,
+                decoration: const InputDecoration(labelText: 'Conteudo'),
+
+                validator: (String? _conteudo){
+                  if(_conteudo!.isEmpty){
+                    return 'Campo obrigatorio';
+                  }
+                },
+                maxLines: 10,),
+              const SizedBox(height: 20),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  ElevatedButton(
+                    onPressed: () async{
+                      if(_formularioKey.currentState!.validate()){
+                        User 
+                      }
+                      Navigator.pop(context);
+                      ScaffoldMessenger.of(context).showSnackBar((
                         const SnackBar(
-                          content: Text('Operacao cancelada'),
+                          content: Text('Nota salva com sucesso'),
                         )),
-                    );
-                  }, 
-                  child: Text('Cancelar')),
-                  const SizedBox(width: 5),  
-              ],
-            ),
-          ],
-        ),
-        ),
+                      );
+                    },
+                    child: Text('Salvar')
+                  ),
+
+                  const SizedBox(width: 10),
+                  ElevatedButton(
+                    onPressed: (){
+                      Navigator.pop(context);
+                      ScaffoldMessenger.of(context).showSnackBar((
+                          const SnackBar(
+                            content: Text('Operacao cancelada'),
+                          )),
+                      );
+                    }, 
+                    child: Text('Cancelar')),
+                    const SizedBox(width: 5),  
+                ],
+              ),
+            ],
+          ),
+          ),
       )
+    ),
     );
   }
 
