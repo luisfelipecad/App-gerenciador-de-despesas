@@ -10,7 +10,7 @@ class NoteApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Blocos de Notas',
-      home: NoteList(),
+      home: _LoginNotas(),
     );
   }
 }
