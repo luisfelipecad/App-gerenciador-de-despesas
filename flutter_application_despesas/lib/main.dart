@@ -32,23 +32,32 @@ class _NoteListState extends State<NoteList> {
       body: ListView.builder(
         itemCount: notes.length,
         itemBuilder: (context, index) {
-          String titulo = notes.keys.elementAt(index);
-          String conteudo = notes.values.elementAt(index);
-
+          String _titulo = notes.keys.elementAt(index);
+          String _conteudo = notes.keys.elementAt(index);
           return ListTile(
-            title: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            title: Text(_titulo),
+            subtitle: Text(_conteudo),
+            
+            trailing: 
+            Row(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                Text(titulo),
-                Text(conteudo),
+                IconButton(
+                  icon: Icon(Icons.edit),
+                  color: Color.fromARGB(255, 255, 0, 0),
+                  onPressed: () {
+                    _editNote(_titulo, _conteudo);
+                  },
+                ),
+                IconButton(
+                  icon: Icon(Icons.delete),
+                  color: Color.fromARGB(255, 255, 0, 0),
+                  onPressed: () {
+                    _deleteNote(_titulo,_conteudo);
+                  },
+                ),
               ],
             ),
-            onTap: () {
-              _editNote(index);
-            },
-            onLongPress: () {
-              _deleteNote(index);
-            },
           );
         },
       ),
@@ -68,7 +77,7 @@ class _NoteListState extends State<NoteList> {
       return AlertDialog(
         content: Container(
           padding: EdgeInsets.symmetric(horizontal: 15, vertical: 30),
-          color: const Color.fromARGB(255, 44, 105, 46),
+          color: Color.fromARGB(255, 217, 255, 218),
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -109,8 +118,7 @@ class _NoteListState extends State<NoteList> {
             onPressed: () {
               if (_titulo.text.isNotEmpty && _conteudo.text.isNotEmpty) {
                 setState(() {
-                  notes[_titulo.text] = _titulo.text;
-                  notes[_conteudo.text] = _conteudo.text;
+                  notes[_titulo.text] = _conteudo.text;
                 });
                 Navigator.of(context).pop();
               }
@@ -124,15 +132,14 @@ class _NoteListState extends State<NoteList> {
 }
 
 
-  void _editNote(int index) {
+
+  void _editNote(String titulo, String conteudo) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
-      String tituloAtual = notes.keys.elementAt(index);
-      String conteudoAtual = notes.values.elementAt(index);
 
-      TextEditingController _titulo = TextEditingController(text: tituloAtual);
-      TextEditingController _conteudo = TextEditingController(text: conteudoAtual);
+      TextEditingController _titulo = TextEditingController(text: titulo);
+      TextEditingController _conteudo = TextEditingController(text: conteudo);
 
       return AlertDialog(
         content: Container(
@@ -177,8 +184,10 @@ class _NoteListState extends State<NoteList> {
           TextButton(
             onPressed: () {
               setState(() {
-                notes.remove(tituloAtual);
+                notes.remove(_titulo);
+                notes.remove(_conteudo);
                 notes[_titulo.text] = _conteudo.text;
+                notes[_conteudo.text] = _conteudo.text;
               });
               Navigator.of(context).pop();
             },
@@ -191,7 +200,7 @@ class _NoteListState extends State<NoteList> {
 }
 
 
-  void _deleteNote(int index) {
+  void _deleteNote(String titulo, String conteudo) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -208,7 +217,8 @@ class _NoteListState extends State<NoteList> {
             TextButton(
               onPressed: () {
                 setState(() {
-                  notes.remove(index);
+                  notes.remove(titulo);
+                  notes.remove(conteudo);
                 });
                 Navigator.of(context).pop();
               },
