@@ -10,7 +10,84 @@ class NoteApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Blocos de Notas',
-      home: NoteList(),
+      home: _LoginNotas(),
+    );
+  }
+}
+
+class _LoginNotas extends StatefulWidget {
+  @override
+  _LoginNotasState createState() => _LoginNotasState();
+}
+
+class _LoginNotasState extends State<_LoginNotas> {
+  TextEditingController _usernameController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Blocos de Notas'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextField(
+              controller: _usernameController,
+              decoration: InputDecoration(
+                labelText: 'Username',
+              ),
+            ),
+            SizedBox(height: 16.0),
+            TextField(
+              controller: _passwordController,
+              obscureText: true,
+              decoration: InputDecoration(
+                labelText: 'Password',
+              ),
+            ),
+            SizedBox(height: 32.0),
+            ElevatedButton(
+              onPressed: () {
+                // Lógica de autenticação fictícia (substitua por sua própria lógica)
+                String username = _usernameController.text;
+                String password = _passwordController.text;
+
+                if (username == 'usuarioteste' && password == 'senhateste') {
+                  // Autenticação bem-sucedida, navega para a tela de blocos de notas
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => NoteList()),
+                  );
+                } else {
+                  // Exibe uma mensagem de erro (substitua por sua própria lógica)
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text('Erro de Autenticação'),
+                        content: Text('Credenciais inválidas. Tente novamente.'),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text('OK'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }
+              },
+              child: Text('Login'),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -34,7 +111,7 @@ class _NoteListState extends State<NoteList> {
         itemCount: notes.length,
         itemBuilder: (context, index) {
           String _titulo = notes.keys.elementAt(index);
-          String _conteudo = notes.keys.elementAt(index);
+          String _conteudo = notes.values.elementAt(index);
           return ListTile(
             title: Text(_titulo),
             subtitle: Text(_conteudo),
