@@ -1,6 +1,6 @@
 {
-    "name": "flutter_application_despesas",
-    "short_name": "flutter_application_despesas",
+    "name": "app_notepad_flutter",
+    "short_name": "app_notepad_flutter",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
