@@ -1,19 +1,19 @@
-import 'package:flutter_application_despesas/models/notas.dart';
+import 'package:flutter_application_despesas/models/Note_models.dart';
 
 class DataUser{
-  Future<List<Nota>> getNotas() async{
+  Future<List<Notes_Models>> getNotas() async{
 
-    List<Nota> MyNotes = [
-      Nota(titulo: 'Teste 1', conteudo: 'Ta sendo testado 01'),
-      Nota(titulo: 'Teste 2', conteudo: 'Ta sendo testado 02'),
-      Nota(titulo: 'Teste 3', conteudo: 'Ta sendo testado 03'),
-      Nota(titulo: 'Teste 4', conteudo: 'Ta sendo testado 04'),
-      Nota(titulo: 'Teste 5', conteudo: 'Ta sendo testado 05'),
+    List<Notes_Models> MyNotes = [
+      Notes_Models(titulo: 'Teste 1', conteudo: 'Ta sendo testado 01'),
+      Notes_Models(titulo: 'Teste 2', conteudo: 'Ta sendo testado 02'),
+      Notes_Models(titulo: 'Teste 3', conteudo: 'Ta sendo testado 03'),
+      Notes_Models(titulo: 'Teste 4', conteudo: 'Ta sendo testado 04'),
+      Notes_Models(titulo: 'Teste 5', conteudo: 'Ta sendo testado 05'),
   ];
     return MyNotes;
   }
 
-  saveNotas(String titulo, String conteudo){
-    
+  saveNotas(String _titulo, String _conteudo){
+     
   }
 }

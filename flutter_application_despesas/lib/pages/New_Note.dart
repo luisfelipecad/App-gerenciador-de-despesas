@@ -1,14 +1,18 @@
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_application_despesas/models/Note_models.dart';
 import 'package:flutter_application_despesas/values/tema.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class models extends StatefulWidget {
   
   @override
-  State<models> createState() => _modelsState();
+  State<models> createState() => New_Note();
 }
 
-class _modelsState extends State<models> {
+class New_Note extends State<models> {
   
   final _tituloController = new TextEditingController();
   final _conteudoController = new TextEditingController();
@@ -57,7 +61,9 @@ class _modelsState extends State<models> {
                   ElevatedButton(
                     onPressed: () async{
                       if(_formularioKey.currentState!.validate()){
-                        User 
+                        _SaveNote(){
+
+                        }
                       }
                       Navigator.pop(context);
                       ScaffoldMessenger.of(context).showSnackBar((
@@ -96,5 +102,22 @@ class _modelsState extends State<models> {
     this._conteudoController.dispose();
     this._tituloController.dispose();
     super.dispose();
+  }
+
+  void _SaveNote(){
+    Notes_Models new_note = Notes_Models(
+      titulo: _tituloController.text,
+      conteudo: _conteudoController.text
+    );
+    _SaveInUser(new_note);
+
+  }
+
+  void _SaveInUser(Notes_Models New_note) async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(
+      "SAVE_NOTE_LOCAL",
+      json.encode(New_note.toJson()),
+    );
   }
 }
