@@ -23,6 +23,7 @@ class NoteList extends StatefulWidget {
 class _NoteListState extends State<NoteList> {
   Map<String,String> notes = {};
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,7 +78,7 @@ class _NoteListState extends State<NoteList> {
       return AlertDialog(
         content: Container(
           padding: EdgeInsets.symmetric(horizontal: 15, vertical: 30),
-          color: Color.fromARGB(255, 217, 255, 218),
+          color: Color.fromRGBO(181, 248, 184, 1),
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -144,7 +145,7 @@ class _NoteListState extends State<NoteList> {
       return AlertDialog(
         content: Container(
           padding: EdgeInsets.symmetric(horizontal: 15, vertical: 30),
-          color: Color.fromARGB(255, 71, 90, 143),
+          color: Color.fromRGBO(181, 248, 184, 1),
           child: SingleChildScrollView(
             child: Column(
               children: [
