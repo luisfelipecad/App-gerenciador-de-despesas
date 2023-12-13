@@ -10,7 +10,7 @@ class NoteApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Blocos de Notas',
-      home: _LoginNotas(),
+      home: NoteList(),
     );
   }
 }
@@ -215,9 +215,8 @@ class _NoteListState extends State<NoteList> {
   showDialog(
     context: context,
     builder: (BuildContext context) {
-
-      TextEditingController _titulo = TextEditingController(text: titulo);
-      TextEditingController _conteudo = TextEditingController(text: conteudo);
+      TextEditingController _tituloController = TextEditingController(text: titulo);
+      TextEditingController _conteudoController = TextEditingController(text: conteudo);
 
       return AlertDialog(
         content: Container(
@@ -227,7 +226,7 @@ class _NoteListState extends State<NoteList> {
             child: Column(
               children: [
                 TextFormField(
-                  controller: _titulo,
+                  controller: _tituloController,
                   decoration: const InputDecoration(labelText: 'Titulo'),
                   validator: (String? value) {
                     if (value!.isEmpty) {
@@ -237,7 +236,7 @@ class _NoteListState extends State<NoteList> {
                   },
                 ),
                 TextFormField(
-                  controller: _conteudo,
+                  controller: _conteudoController,
                   decoration: const InputDecoration(labelText: 'Conteudo'),
                   validator: (String? value) {
                     if (value!.isEmpty) {
@@ -262,10 +261,11 @@ class _NoteListState extends State<NoteList> {
           TextButton(
             onPressed: () {
               setState(() {
-                notes.remove(_titulo);
-                notes.remove(_conteudo);
-                notes[_titulo.text] = _conteudo.text;
-                notes[_conteudo.text] = _conteudo.text;
+                // Remova a nota existente antes de adicionar a atualizada
+                notes.remove(titulo);
+
+                // Adicione a nova nota ao mapa
+                notes[_tituloController.text] = _conteudoController.text;
               });
               Navigator.of(context).pop();
             },
@@ -276,7 +276,6 @@ class _NoteListState extends State<NoteList> {
     },
   );
 }
-
 
   void _deleteNote(String titulo, String conteudo) {
     showDialog(
