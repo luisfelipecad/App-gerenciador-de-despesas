@@ -109,7 +109,7 @@ class _NoteListState extends State<NoteList> {
             onPressed: () {
               if (_titulo.text.isNotEmpty && _conteudo.text.isNotEmpty) {
                 setState(() {
-                  notes[_titulo.text, _conteudo.text] = _titulo.text;
+                  notes[_titulo.text] = _titulo.text;
                   notes[_conteudo.text] = _conteudo.text;
                 });
                 Navigator.of(context).pop();
