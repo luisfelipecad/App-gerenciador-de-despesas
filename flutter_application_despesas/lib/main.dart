@@ -5,6 +5,9 @@ void main() {
   runApp(NoteApp());
 }
 
+//  StateLessWidget  e basicamente um widget imutavel um widget cujo estado
+// nao pode se  alterado 
+
 class NoteApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -21,6 +24,8 @@ class _LoginNotas extends StatefulWidget {
 }
 
 class _LoginNotasState extends State<_LoginNotas> {
+
+  // sao controlar e interagir um campo de texto 
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
 
@@ -28,7 +33,16 @@ class _LoginNotasState extends State<_LoginNotas> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Blocos de Notas'),
+        title: Container(
+          child: Row(
+            children: [
+              Image.asset('assets/logo_notas.png', height: 50,),
+              SizedBox(width: 8,),
+              Text('Blocos de Notas', style: TextStyle(color: Colors.black),),        
+            ],
+          ),
+        ),
+        backgroundColor: Color.fromRGBO(251, 255, 0, 1),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -83,7 +97,8 @@ class _LoginNotasState extends State<_LoginNotas> {
                   );
                 }
               },
-              child: Text('Login'),
+              style: ElevatedButton.styleFrom(primary: Color.fromRGBO(251, 255, 0, 1)),
+              child: Text('Login', style: TextStyle(color: Colors.black),),
             ),
           ],
         ),
@@ -100,12 +115,23 @@ class NoteList extends StatefulWidget {
 class _NoteListState extends State<NoteList> {
   Map<String,String> notes = {};
 
-
+// Corpo da tela Home
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Blocos de Notas'),
+        title: Container(
+          child: Row(
+            children: [
+              Image.asset('assets/logo_notas.png', height: 50,),
+              SizedBox(width: 8,),
+              Text('Blocos de Notas', 
+                style: TextStyle(color: Colors.black),),
+            ]
+          ),
+        ),
+        backgroundColor: Color.fromRGBO(251, 255, 0, 1),
+
       ),
       body: ListView.builder(
         itemCount: notes.length,
@@ -113,8 +139,10 @@ class _NoteListState extends State<NoteList> {
           String _titulo = notes.keys.elementAt(index);
           String _conteudo = notes.values.elementAt(index);
           return ListTile(
-            title: Text(_titulo),
-            subtitle: Text(_conteudo),
+            title: Text(_titulo, 
+                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+            subtitle: Text(_conteudo,
+                          style: TextStyle(fontSize: 16),),
             
             trailing: 
             Row(
@@ -141,7 +169,8 @@ class _NoteListState extends State<NoteList> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _addNote,
-        child: Icon(Icons.add),
+        backgroundColor: Color.fromRGBO(251, 255, 0, 1),
+        child: Icon(Icons.add, color: Colors.black, size: 36,),
       ),
     );
   }
@@ -153,15 +182,16 @@ class _NoteListState extends State<NoteList> {
       TextEditingController _titulo = TextEditingController();
       TextEditingController _conteudo = TextEditingController();
       return AlertDialog(
+        backgroundColor: Color.fromRGBO(248, 255, 147, 1),
         content: Container(
           padding: EdgeInsets.symmetric(horizontal: 15, vertical: 30),
-          color: Color.fromRGBO(181, 248, 184, 1),
+          color: Color.fromRGBO(248, 255, 147, 1),
           child: SingleChildScrollView(
             child: Column(
               children: [
                 TextFormField(
                   controller: _titulo,
-                  decoration: const InputDecoration(labelText: 'Titulo'),
+                  decoration: const InputDecoration(labelText: 'Titulo', fillColor: Colors.black,),
                   validator: (String? value) {
                     if (value!.isEmpty) {
                       return 'Campo obrigatório';
@@ -171,7 +201,7 @@ class _NoteListState extends State<NoteList> {
                 ),
                 TextFormField(
                   controller: _conteudo,
-                  decoration: const InputDecoration(labelText: 'Conteudo'),
+                  decoration: const InputDecoration(labelText: 'Conteudo', fillColor: Colors.black),
                   validator: (String? value) {
                     if (value!.isEmpty) {
                       return 'Campo obrigatório';
@@ -180,7 +210,7 @@ class _NoteListState extends State<NoteList> {
                   },
                   maxLines: 10,
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 30),
               ],
             ),
           ),
@@ -219,9 +249,10 @@ class _NoteListState extends State<NoteList> {
       TextEditingController _conteudoController = TextEditingController(text: conteudo);
 
       return AlertDialog(
+        backgroundColor: Color.fromRGBO(248, 255, 147, 1),
         content: Container(
           padding: EdgeInsets.symmetric(horizontal: 15, vertical: 30),
-          color: Color.fromRGBO(181, 248, 184, 1),
+          color: Color.fromRGBO(248, 255, 147, 1),
           child: SingleChildScrollView(
             child: Column(
               children: [
