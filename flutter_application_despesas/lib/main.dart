@@ -38,7 +38,7 @@ class _LoginNotasState extends State<_LoginNotas> {
             children: [
               Image.asset('assets/logo_notas.png', height: 50,),
               SizedBox(width: 8,),
-              Text('Blocos de Notas', style: TextStyle(color: Colors.black),),        
+              Text('Blocos de Notas', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold,  fontSize: 28),),        
             ],
           ),
         ),
@@ -126,7 +126,7 @@ class _NoteListState extends State<NoteList> {
               Image.asset('assets/logo_notas.png', height: 50,),
               SizedBox(width: 8,),
               Text('Blocos de Notas', 
-                style: TextStyle(color: Colors.black),),
+                style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold,  fontSize: 28),),
             ]
           ),
         ),
